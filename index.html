@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script type="text/javascript" src="./jquery.min.js"></script>
+</head>
+<body>
+    <h3>手机归属地查询</h3>
+    <input type="text" name="user" id="user">	
+    <button id="btn">提交</button>
+    <ul id="uls">
+    	
+    </ul>
+</body>
+</html>
+
+<script>
+	$(function(){
+    $("#btn").click(function(){
+        
+        var tel=$('#user').val()
+
+       $.ajax({
+       	type:'GET',
+       	dataType:'jsonp',
+       	url:'https://api.asilu.com/phone/',
+       	data:{
+       		phone:tel
+       	},
+       	success:function(data){
+       	  $("#uls").append("<li>手机号:"+data.phone+"</li>");
+       	  $("#uls").append("<li>省份:"+data.province+"</li>");
+       	  $("#uls").append("<li>城市:"+data.city+"</li>");
+       	  $("#uls").append("<li>号码类型:"+data.sp+"</li>");
+       	   $("#uls").append("<li>手机号区号:"+data.areacode+"</li>");
+       	}
+       })
+
+    })
+	})
+</script>
